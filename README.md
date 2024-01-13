@@ -1,6 +1,7 @@
-# mybag
+# My Bag
 
-A new Flutter project.
+A new Flutter project as an Assignment.
+To create a simple flutter Cart item add/drop and calculating total sum.
 
 ## Getting Started
 
