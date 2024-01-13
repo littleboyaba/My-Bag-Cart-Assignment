@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductCard extends StatefulWidget {
   final String itemName;
@@ -37,66 +38,136 @@ class ProductCardState extends State<ProductCard> {
           children: [
             Row(
               children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.grey,
+                SizedBox(
+                  width: 120,
+                  height: 120,
                   child: Image.asset(
                       'assets/images/${widget.image.toLowerCase()}.png'),
                 ),
-                const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.itemName,
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    Row(
-                      children: [
-                        Text('Color: ${widget.color}'),
-                        const SizedBox(width: 10),
-                        Text('Size: ${widget.size}'),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.remove),
-                              onPressed: () {
-                                if (widget.quantity > 1) {
-                                  widget.updateQuantity(widget.quantity - 1);
-                                }
-                              },
-                            ),
-                            Text('${widget.quantity}'),
-                            IconButton(
-                              icon: const Icon(Icons.add),
-                              onPressed: () {
-                                if (widget.quantity < 15) {
-                                  widget.updateQuantity(widget.quantity + 1);
-                                  if (widget.quantity == 5) {
-                                    // Show dialog or perform other actions if needed
-                                  }
-                                }
-                              },
-                            ),
-                            const SizedBox(width: 40),
-                            Text(
-                              'Price: \$${(widget.quantity * widget.unitPrice).toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                const SizedBox(width: 2),
+                Expanded(
+                  child: SizedBox(
+                    height: 120,
+                    width: 238,
+                    child: Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          // ============== Name Title & Menu Icon Start ============
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                widget.itemName,
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              // ============ SVG Icon Experiment ============
+                              IconButton(
+                                icon: SvgPicture.asset(
+                                  'assets/icons/ellipsisIcon.svg',
+                                  width: 24,
+                                  height: 24,
+                                ),
+                                onPressed: () {
+                                  // Handle button press
+                                },
+                              ),
+                              //============ SVG Icon Experiment =============
+                            ],
+                          ),
+                          // ============== Name Title End ============
+
+                          // ============== Color & Size Start ============
+                          Row(
+                            children: [
+                              // ============== RichText Experiment ============
+                              RichText(
+                                text: TextSpan(
+                                  text: 'Color: ',
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: widget.color,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              ),
+                              // ============== RichText Experiment ============
+                              const SizedBox(width: 10),
+                              RichText(
+                                text: TextSpan(
+                                  text: 'Size: ',
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: widget.size,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              ),
+                              // ============== RichText Experiment ============
+                            ],
+                          ),
+                          // ============== Color & Size  End ============
+                          Row(
+                            children: [
+                              Expanded(
+                                child: SizedBox(
+                                  // ===================== Increment Decrement Button & Price Section =================
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      // ===================== Increment Decrement Button Start =================
+                                      IconButton(
+                                        icon: const Icon(Icons.remove),
+                                        onPressed: () {
+                                          if (widget.quantity > 1) {
+                                            widget.updateQuantity(
+                                                widget.quantity - 1);
+                                          }
+                                        },
+                                      ),
+                                      Text('${widget.quantity}'),
+                                      IconButton(
+                                        icon: const Icon(Icons.add),
+                                        onPressed: () {
+                                          if (widget.quantity < 15) {
+                                            widget.updateQuantity(
+                                                widget.quantity + 1);
+                                            if (widget.quantity == 5) {
+                                              // Show dialog or perform other actions if needed
+                                            }
+                                          }
+                                        },
+                                      ),
+                                      // ===================== Increment Decrement Button End =================
+
+                                      const Spacer(),
+                                      // ===================== Item Price Start =================
+                                      Text(
+                                        'Price: \$${(widget.quantity * widget.unitPrice).toStringAsFixed(2)}',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      // ===================== Item Price End =================
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),
@@ -107,6 +178,8 @@ class ProductCardState extends State<ProductCard> {
     );
   }
 }
+
+// ===================== Total Price Section =================
 
 class TotalPriceRow extends StatelessWidget {
   final double totalPrice;
@@ -137,6 +210,8 @@ class TotalPriceRow extends StatelessWidget {
     );
   }
 }
+
+// ===================== Check Out Section =================
 
 class CheckoutButton extends StatelessWidget {
   final VoidCallback onCheckout;
