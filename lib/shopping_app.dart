@@ -142,26 +142,36 @@ class ShoppingAppState extends State<ShoppingApp> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Congratulation!'),
-          content: Text("You have added $quantity $itemName's on your bag!"),
+          title: const Text(
+            'Congratulation!',
+            textAlign: TextAlign.center,
+          ),
+          content: SizedBox(
+            height: 80,
+            child: Column(
+              children: [
+                const Text("You have added"),
+                Text(" $quantity"),
+                Text("$itemName's on your bag!"),
+              ],
+            ),
+          ),
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                'OKAY',
-                style: TextStyle(
-                  background: Paint()
-                    ..strokeWidth = 30
-                    ..color = Colors.red
-                    ..strokeJoin = StrokeJoin.round
-                    ..strokeCap = StrokeCap.round
-                    ..style = PaintingStyle.stroke,
-                  fontSize: 20,
-                  color: Colors.white,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: TextButton.styleFrom(backgroundColor: Colors.red),
+                  child: const Text(
+                    'OKAY',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         );
