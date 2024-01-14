@@ -151,7 +151,7 @@ class ProductCardState extends State<ProductCard> {
                                       const Spacer(),
                                       // ===================== Item Price Start =================
                                       Text(
-                                        'Price: \$${(widget.quantity * widget.unitPrice).toStringAsFixed(2)}',
+                                        '\$${(widget.quantity * widget.unitPrice)}',
                                         style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
@@ -198,11 +198,11 @@ class TotalPriceRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            'Total Price:',
+            'Total Amount:',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           Text(
-            '\$${totalPrice.toStringAsFixed(2)}',
+            '\$$totalPrice',
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],
