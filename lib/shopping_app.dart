@@ -145,14 +145,24 @@ class ShoppingAppState extends State<ShoppingApp> {
           title: const Text(
             'Congratulation!',
             textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
           content: SizedBox(
             height: 80,
             child: Column(
               children: [
-                const Text("You have added"),
-                Text(" $quantity"),
-                Text("$itemName's on your bag!"),
+                const Text(
+                  "You have added",
+                  style: TextStyle(fontSize: 18),
+                ),
+                Text(
+                  " $quantity",
+                  style: const TextStyle(fontSize: 18),
+                ),
+                Text(
+                  "$itemName's on your bag!",
+                  style: const TextStyle(fontSize: 18),
+                ),
               ],
             ),
           ),
@@ -161,14 +171,22 @@ class ShoppingAppState extends State<ShoppingApp> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: TextButton.styleFrom(backgroundColor: Colors.red),
-                  child: const Text(
-                    'OKAY',
-                    style: TextStyle(color: Colors.white),
+                Container(
+                  margin: const EdgeInsets.all(16),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 50, vertical: 12),
+                        textStyle: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
+                    child: const Text(
+                      'OKAY',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ],
